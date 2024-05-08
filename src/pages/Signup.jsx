@@ -142,7 +142,7 @@ function SignUp() {
 									>
 										I accept the{" "}
 										<a
-											className="font-medium text-primaryForm-600 hover:underline dark:text-primaryForm-500"
+											className="font-medium text-blue-500 hover:underline"
 											href="#"
 										>
 											Terms and Conditions
@@ -158,7 +158,7 @@ function SignUp() {
 							<p className="text-sm font-light text-gray-500 dark:text-gray-400">
 								Already have an account?{" "}
 								<Link to="/login">
-									<button className="font-medium text-primaryForm-600 hover:underline dark:text-primaryForm-500">
+									<button className="font-medium text-blue-500 hover:underline">
 										Login here
 									</button>
 								</Link>

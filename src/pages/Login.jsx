@@ -119,7 +119,7 @@ function Login() {
 							<p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
 								Don’t have an account yet?{" "}
 								<Link to="/signup">
-									<button className="font-medium text-primaryForm-600 hover:underline dark:text-primaryForm-500">
+									<button className="font-medium text-blue-500 hover:underline">
 										Sign up
 									</button>
 								</Link>

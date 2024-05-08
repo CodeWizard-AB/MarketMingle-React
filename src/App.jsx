@@ -6,7 +6,9 @@ function App() {
 	return (
 		<div>
 			<NavBar />
-			<Outlet />
+			<main className="mx-auto max-w-screen-xl">
+				<Outlet />
+			</main>
 			<Footer />
 		</div>
 	);

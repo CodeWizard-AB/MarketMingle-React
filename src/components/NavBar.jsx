@@ -1,5 +1,5 @@
 import { navButtons, navigation } from "../constant";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import DrawerContainer from "./Drawer";
 import { useAuth } from "../contexts/AuthContext";
 import Account from "./Account";
@@ -9,16 +9,17 @@ import Logo from "../assets/Logo.png";
 
 function NavBar() {
 	const { user } = useAuth();
+	const location = useLocation();
 
 	return (
 		<nav
-			className={`flex px-4 lg:px-40 m-auto py-4 shadow-md font-medium text-lg items-center justify-between w-full`}
+			className={`flex px-4 lg:px-28 py-5 ${
+				location.pathname !== "/" && "border-b shadow-sm"
+			} font-medium text-lg items-center justify-between w-full`}
 		>
-			<h3 className="font-bold text-2xl flex-1 md:flex-none ml-2 md:m-0">
-				<Link to="/">
-					<img src={Logo} alt="website logo" className="w-60" />
-				</Link>
-			</h3>
+			<Link to="/">
+				<img src={Logo} alt="website logo" className="w-60" />
+			</Link>
 			<ul className="hidden lg:flex lg:gap-8">
 				{navigation.map((item, i) => (
 					<li key={i}>
