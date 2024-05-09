@@ -64,7 +64,7 @@ function SignUp() {
 	};
 
 	return (
-		<section className="dark:bg-gray-900 mb-12 lg:mb-0">
+		<section className="dark:bg-gray-900 mb-12 py-10 lg:mb-0">
 			<div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center px-6 mx-auto lg:py-0">
 				<figure>
 					<Lottie animationData={signUpAnimation} loop={true} />

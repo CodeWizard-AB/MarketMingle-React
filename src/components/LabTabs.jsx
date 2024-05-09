@@ -1,30 +1,53 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import JobCard from "./JobCard";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function LabTabs() {
-	const [value, setValue] = React.useState("1");
+	const [value, setValue] = useState("0");
+	const [jobs, setJobs] = useState();
 
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
+	useEffect(() => {
+		const getData = async () => {
+			const { data } = await axios.get(
+				`${import.meta.env.VITE_APP_URL}/market-jobs`
+			);
+			setJobs(data);
+		};
+		getData();
+	}, []);
+
+	const categories = [...new Set(jobs?.map((item) => item.category))];
 
 	return (
 		<Box sx={{ width: "100%", typography: "body1" }}>
 			<TabContext value={value}>
 				<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-					<TabList onChange={handleChange} aria-label="lab API tabs example" centered>
-						<Tab label="Web Development" value="1" />
-						<Tab label="Graphics Design" value="2" />
-						<Tab label="Digital Marketing" value="3" />
+					<TabList
+						onChange={(_, newValue) => setValue(newValue)}
+						aria-label="lab API tabs example"
+						centered={true}
+					>
+						{categories?.map((item, i) => (
+							<Tab label={item} value={String(i)} key={i * 99} />
+						))}
 					</TabList>
 				</Box>
-				<TabPanel value="1">Item One</TabPanel>
-				<TabPanel value="2">Item Two</TabPanel>
-				<TabPanel value="3">Item Three</TabPanel>
+				{categories?.map((category, i) => (
+					<TabPanel value={String(i)} key={i * 999}>
+						<div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+							{jobs
+								?.filter((item) => item.category === category)
+								.map((job) => (
+									<JobCard key={job._id} job={job} />
+								))}
+						</div>
+					</TabPanel>
+				))}
 			</TabContext>
 		</Box>
 	);

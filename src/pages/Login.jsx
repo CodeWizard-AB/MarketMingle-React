@@ -23,7 +23,7 @@ function Login() {
 	}, [user, navigate, location.state]);
 
 	return (
-		<section className="dark:bg-gray-900 mb-12 lg:mb-0">
+		<section className="dark:bg-gray-900 mb-12 lg:mb-0 py-10">
 			<div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center px-6 mx-auto lg:py-0">
 				<figure>
 					<Lottie animationData={loginAnimation} loop={true} />

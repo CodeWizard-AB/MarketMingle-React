@@ -33,4 +33,64 @@ const sliderData = [
 	},
 ];
 
-export { navigation, navButtons, sliderData };
+const formLabel = [
+	{
+		title: "Price",
+		type: "text",
+		holder: "200",
+		id: "price",
+	},
+	{
+		title: "Email Address",
+		type: "email",
+		holder: "name@company.com",
+		id: "email",
+	},
+	{
+		title: "Message",
+		type: "text",
+		holder: "message",
+		id: "message",
+	},
+	{
+		title: "Deadline",
+		type: "date",
+		holder: "",
+		id: "deadline",
+	},
+];
+
+const jobDetials = [
+	{
+		label: "Job Title",
+		type: "text",
+		id: "job_title",
+	},
+	{
+		label: "Email Address",
+		type: "email",
+		id: "buyer_email",
+	},
+	{
+		label: "Minimum Price",
+		type: "number",
+		id: "min_price",
+	},
+	{
+		label: "Maximum Price",
+		type: "number",
+		id: "max_price",
+	},
+	{
+		label: "Deadline",
+		type: "date",
+		id: "deadline",
+	},
+	{
+		label: "Job Description",
+		type: "text",
+		id: "description",
+	},
+];
+
+export { navigation, navButtons, sliderData, formLabel, jobDetials };
