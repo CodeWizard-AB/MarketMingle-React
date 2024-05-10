@@ -1,7 +1,23 @@
+import axios from "axios";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 
 function JobBids() {
-	const jobBids = useLoaderData();
+	const [jobBids, setJobBids] = useState(useLoaderData());
+	const handleComplete = function (id) {
+		axios
+			.patch(`${import.meta.env.VITE_APP_URL}/market-bids/${id}`, {
+				status: "complete",
+			})
+			.then(() => {
+				setJobBids((jobs) => [
+					...jobs.filter((job) => job._id !== id),
+					{ ...jobs.find((job) => job._id === id), status: "complete" },
+				]);
+				toast.success("You work has done");
+			});
+	};
 
 	return (
 		<section className="container px-4 mx-auto py-16">
@@ -100,9 +116,10 @@ function JobBids() {
 												<button
 													disabled={item.status !== "progress"}
 													title="Mark Complete"
-													className={`text-gray-500 transition-colors duration-200   ${
-														item.status === "progrees" && "hover:text-red-500"
+													className={`text-gray-500 transition-colors duration-200 ${
+														item.status === "progress" && "hover:text-red-500"
 													} focus:outline-none disabled:cursor-not-allowed`}
+													onClick={handleComplete.bind(null, item._id)}
 												>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"

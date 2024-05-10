@@ -14,7 +14,8 @@ export default function LabTabs() {
 	useEffect(() => {
 		const getData = async () => {
 			const { data } = await axios.get(
-				`${import.meta.env.VITE_APP_URL}/market-jobs`
+				`${import.meta.env.VITE_APP_URL}/market-jobs`,
+				{ withCredentials: true }
 			);
 			setJobs(data);
 		};

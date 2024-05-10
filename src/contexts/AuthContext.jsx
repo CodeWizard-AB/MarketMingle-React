@@ -16,6 +16,7 @@ import {
 	signOut,
 	updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -26,6 +27,15 @@ const AuthProvider = function ({ children }) {
 
 	useEffect(() => {
 		const active = onAuthStateChanged(auth, (user) => {
+			axios
+				.post(
+					`${import.meta.env.VITE_APP_URL}/jwt`,
+					{
+						email: user?.email,
+					},
+					{ withCredentials: true }
+				)
+				.then(({ data }) => console.log(data));
 			setUser(user);
 			setLoading(false);
 		});
@@ -57,6 +67,9 @@ const AuthProvider = function ({ children }) {
 	const logOut = async function () {
 		try {
 			await signOut(auth);
+			await axios.get(`${import.meta.env.VITE_APP_URL}/logout`, {
+				withCredentials: true,
+			});
 			toast.success("Log out successfully");
 		} catch (error) {
 			toast.error("Failed to log out");
@@ -89,7 +102,16 @@ const AuthProvider = function ({ children }) {
 
 	return (
 		<AuthContext.Provider
-			value={{ signUp, logIn, logOut, user, logInWithMedia, theme, setTheme, loading }}
+			value={{
+				signUp,
+				logIn,
+				logOut,
+				user,
+				logInWithMedia,
+				theme,
+				setTheme,
+				loading,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>

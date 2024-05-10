@@ -3,9 +3,10 @@ import { useAuth } from "../contexts/AuthContext";
 function Theme() {
 	const { theme, setTheme } = useAuth();
 	return (
-		<label className={`swap swap-rotate w-10 aspect-square`}>
+		<label className={`swap swap-rotate w-10 aspect-square`} htmlFor="checkbox">
 			{/* this hidden checkbox controls the state */}
 			<input
+				id="checkbox"
 				type="checkbox"
 				className="theme-controller"
 				value={theme}

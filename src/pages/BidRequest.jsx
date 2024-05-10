@@ -127,12 +127,13 @@ const BidRequests = () => {
 											<td className="px-4 py-4 text-sm whitespace-nowrap">
 												<div className="flex items-center gap-x-6">
 													<button
-														className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none"
+														className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none disabled:cursor-not-allowed"
 														onClick={handleStatus.bind(
 															null,
 															item._id,
 															"progress"
 														)}
+														disabled={item.status === "complete"}
 													>
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
@@ -151,12 +152,13 @@ const BidRequests = () => {
 													</button>
 
 													<button
-														className="text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none"
+														className="text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none disabled:cursor-not-allowed"
 														onClick={handleStatus.bind(
 															null,
 															item._id,
 															"reject"
 														)}
+														disabled={item.status === "complete"}
 													>
 														<svg
 															xmlns="http://www.w3.org/2000/svg"

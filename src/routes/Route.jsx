@@ -38,7 +38,9 @@ export const router = createBrowserRouter([
 					</PrivateRoute>
 				),
 				loader: ({ params: { id } }) =>
-					fetch(`${import.meta.env.VITE_APP_URL}/market-jobs/${id}`),
+					fetch(`${import.meta.env.VITE_APP_URL}/market-jobs/${id}`, {
+						credentials: "include",
+					}),
 			},
 			{
 				path: "/post-job/:email",
@@ -56,7 +58,9 @@ export const router = createBrowserRouter([
 					</PrivateRoute>
 				),
 				loader: ({ params: { email } }) =>
-					fetch(`${import.meta.env.VITE_APP_URL}/market-jobs?email=${email}`),
+					fetch(`${import.meta.env.VITE_APP_URL}/market-jobs?email=${email}`, {
+						credentials: "include",
+					}),
 			},
 			{
 				path: "/job-bids/:email",
@@ -66,7 +70,9 @@ export const router = createBrowserRouter([
 					</PrivateRoute>
 				),
 				loader: ({ params: { email } }) =>
-					fetch(`${import.meta.env.VITE_APP_URL}/market-bids?email=${email}`),
+					fetch(`${import.meta.env.VITE_APP_URL}/market-bids?email=${email}`, {
+						credentials: "include",
+					}),
 			},
 			{
 				path: "/bid-request/:email",
@@ -77,7 +83,8 @@ export const router = createBrowserRouter([
 				),
 				loader: ({ params: { email } }) =>
 					fetch(
-						`${import.meta.env.VITE_APP_URL}/market-bids?buyer_email=${email}`
+						`${import.meta.env.VITE_APP_URL}/market-bids?buyer_email=${email}`,
+						{ credentials: "include" }
 					),
 			},
 		],
