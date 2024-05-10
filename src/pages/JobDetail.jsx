@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { formLabel } from "../constant";
 import Stack from "@mui/material/Stack";
@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 
 function JobDetail() {
 	const { user } = useAuth();
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({ email: user?.email });
 	const {
 		job_title,
@@ -45,7 +46,7 @@ function JobDetail() {
 				job_id,
 				status: "pending",
 			});
-			Swal.fire({
+			await Swal.fire({
 				position: "top-end",
 				icon: "success",
 				title: "Your bid has been submited",
@@ -53,6 +54,7 @@ function JobDetail() {
 				timer: 1500,
 			});
 			setFormData({ email: user?.email });
+			navigate(`/job-bids/${user?.email}`);
 		} catch (error) {
 			console.log(error);
 		}

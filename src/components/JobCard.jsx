@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function JobCard({ job }) {
 	const navigate = useNavigate();
+
 	return (
 		<div className="max-w-2xl px-8 py-6 bg-white rounded-lg shadow-md dark:bg-gray-800 h-full flex flex-col justify-between border">
 			<div className="flex items-center justify-between">
@@ -36,7 +37,7 @@ function JobCard({ job }) {
 						borderRadius: 0,
 						padding: 0,
 					}}
-					onClick={() => navigate(`/job/${job._id}`)}
+					onClick={() => navigate(`/market-jobs/${job._id}`)}
 				>
 					Read More
 				</Button>

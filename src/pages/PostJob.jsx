@@ -7,26 +7,30 @@ import { useState } from "react";
 import axios from "axios";
 import ButtonContainer from "../components/Button";
 import { useAuth } from "../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 function PostJob() {
 	const { user } = useAuth();
 	const [postData, setPostData] = useState({ buyer_email: user?.email });
 	const handleJobPost = function (e) {
 		e.preventDefault();
-		axios.post(`${import.meta.env.VITE_APP_URL}/market-jobs`, {
-			...postData,
-			buyer_name: user?.displayName,
-			buyer_email: user?.email,
-		});
+		axios
+			.post(`${import.meta.env.VITE_APP_URL}/market-jobs`, {
+				...postData,
+				buyer_name: user?.displayName,
+				buyer_email: user?.email,
+			})
+			.then(() => toast.success("Your job has been posted"));
 	};
 
 	return (
-		<div className="my-20 grid place-items-center">
+		<div className="my-10 px-6 md:px-0 grid md:place-items-center">
+			<h1 className="font-bold text-3xl mb-10">Post Your Job</h1>
 			<form
-				className="grid md:grid-cols-2 gap-6 last:*:col-span-2 md:min-w-[600px] last:*:justify-self-end"
+				className="grid grid-cols-1 md:grid-cols-2 gap-6 md:last:*:col-span-2 md:min-w-[600px] last:*:justify-self-end"
 				onSubmit={handleJobPost}
 			>
-				<div className="row-start-3 col-start-2">
+				<div className="row-start-3 md:col-start-2">
 					<Stack spacing={1}>
 						<label htmlFor="category" className="font-medium">
 							Category
@@ -53,7 +57,7 @@ function PostJob() {
 				{jobDetials.map((item, i) => (
 					<div
 						key={i * 1}
-						className={`${item.id === "description" && "col-span-2"}`}
+						className={`${item.id === "description" && "md:col-span-2"}`}
 					>
 						<Stack spacing={1}>
 							<label htmlFor={item.id} className="font-medium">

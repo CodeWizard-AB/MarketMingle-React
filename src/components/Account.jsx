@@ -13,6 +13,7 @@ import Logout from "@mui/icons-material/Logout";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import WorkHistoryOutlinedIcon from "@mui/icons-material/WorkHistoryOutlined";
 import CurrencyBitcoinOutlinedIcon from "@mui/icons-material/CurrencyBitcoinOutlined";
+import RequestPageOutlinedIcon from "@mui/icons-material/RequestPageOutlined";
 
 export default function Account() {
 	const { user, logOut } = useAuth();
@@ -91,27 +92,41 @@ export default function Account() {
 					anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
 				>
 					<MenuItem onClick={handleClose}>
-						<Avatar /> {user?.displayName}
+						<Avatar src={user?.photoURL} /> {user?.displayName}
 					</MenuItem>
 					<Divider />
-					<MenuItem onClick={handleClose}>
-						<ListItemIcon>
-							<AddCircleOutlineOutlinedIcon />
-						</ListItemIcon>
-						<Link to='/post-job'>Post A Job</Link>
-					</MenuItem>
-					<MenuItem onClick={handleClose}>
-						<ListItemIcon>
-							<WorkHistoryOutlinedIcon />
-						</ListItemIcon>
-						<Link>My Posted Jobs</Link>
-					</MenuItem>
-					<MenuItem onClick={handleClose}>
-						<ListItemIcon>
-							<CurrencyBitcoinOutlinedIcon />
-						</ListItemIcon>
-						<Link>My Bids</Link>
-					</MenuItem>
+					<Link to={`post-job/${user?.email}`}>
+						<MenuItem onClick={handleClose}>
+							<ListItemIcon>
+								<AddCircleOutlineOutlinedIcon />
+							</ListItemIcon>
+							Post A Job
+						</MenuItem>
+					</Link>
+					<Link to={`/posted-jobs/${user?.email}`}>
+						<MenuItem onClick={handleClose}>
+							<ListItemIcon>
+								<WorkHistoryOutlinedIcon />
+							</ListItemIcon>
+							My Posted Jobs
+						</MenuItem>
+					</Link>
+					<Link to={`/job-bids/${user?.email}`}>
+						<MenuItem onClick={handleClose}>
+							<ListItemIcon>
+								<CurrencyBitcoinOutlinedIcon />
+							</ListItemIcon>
+							My Bids
+						</MenuItem>
+					</Link>
+					<Link to={`/bid-request/${user?.email}`}>
+						<MenuItem onClick={handleClose}>
+							<ListItemIcon>
+								<RequestPageOutlinedIcon />
+							</ListItemIcon>
+							Bid Requests
+						</MenuItem>
+					</Link>
 					<MenuItem
 						onClick={() => {
 							logOut();

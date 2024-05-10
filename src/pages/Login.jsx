@@ -1,5 +1,5 @@
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import loginAnimation from "../assets/login.json";
@@ -21,6 +21,9 @@ function Login() {
 	useEffect(() => {
 		if (user) navigate(location.state ? location.state : "/");
 	}, [user, navigate, location.state]);
+
+	if (loading) return <div>Loading...</div>;
+	if (user) return <Navigate to="/" />;
 
 	return (
 		<section className="dark:bg-gray-900 mb-12 lg:mb-0 py-10">

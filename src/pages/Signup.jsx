@@ -1,5 +1,5 @@
 import { useAuth } from "../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { object, string } from "yup";
 import Lottie from "lottie-react";
 import signUpAnimation from "../assets/signup.json";
@@ -28,7 +28,7 @@ function SignUp() {
 		userName: "",
 		photoUrl: "",
 	};
-	const { signUp, user } = useAuth();
+	const { signUp, user, loading } = useAuth();
 	const [error, setError] = useState(null);
 	const [userInfo, setUserInfo] = useState(initialState);
 
@@ -62,6 +62,9 @@ function SignUp() {
 			setUserInfo(initialState);
 		}
 	};
+
+	if (loading) return <div>Loading...</div>;
+	if (user) return <Navigate to="/" />;
 
 	return (
 		<section className="dark:bg-gray-900 mb-12 py-10 lg:mb-0">
