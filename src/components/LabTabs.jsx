@@ -5,22 +5,20 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import JobCard from "./JobCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useAxios from "../hooks/useAxios";
 
 export default function LabTabs() {
 	const [value, setValue] = useState("0");
 	const [jobs, setJobs] = useState();
+	const fetchData = useAxios();
 
 	useEffect(() => {
 		const getData = async () => {
-			const { data } = await axios.get(
-				`${import.meta.env.VITE_APP_URL}/market-jobs`,
-				{ withCredentials: true }
-			);
+			const { data } = await fetchData("/market-jobs");
 			setJobs(data);
 		};
 		getData();
-	}, []);
+	}, [fetchData]);
 
 	const categories = [...new Set(jobs?.map((item) => item.category))];
 

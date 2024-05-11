@@ -1,4 +1,4 @@
-import { navButtons, navigation } from "../constant";
+import { navButtons, } from "../constant";
 import { Link, useLocation } from "react-router-dom";
 import DrawerContainer from "./Drawer";
 import { useAuth } from "../contexts/AuthContext";
@@ -20,14 +20,8 @@ function NavBar() {
 			<Link to="/">
 				<img src={Logo} alt="website logo" className="w-60" />
 			</Link>
-			<ul className="hidden lg:flex lg:gap-8">
-				{navigation.map((item, i) => (
-					<li key={i}>
-						<Link to={item.link}>{item.title}</Link>
-					</li>
-				))}
-			</ul>
 			<div className="flex items-center gap-4">
+				<Link to="/all-jobs">All Jobs</Link>
 				{user ? (
 					<Account />
 				) : (

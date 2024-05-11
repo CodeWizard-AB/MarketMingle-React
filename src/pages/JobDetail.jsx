@@ -5,11 +5,12 @@ import { formLabel } from "../constant";
 import Stack from "@mui/material/Stack";
 import ButtonContainer from "../components/Button";
 import { useAuth } from "../contexts/AuthContext";
-import axios from "axios";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAxios from "../hooks/useAxios";
 
 function JobDetail() {
+	const fetchData = useAxios();
 	const { user } = useAuth();
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({ email: user?.email });
@@ -36,7 +37,7 @@ function JobDetail() {
 			return toast.error("Buyer email and freelancer email should be not same");
 
 		try {
-			await axios.post(`${import.meta.env.VITE_APP_URL}/market-bids`, {
+			await fetchData.post(`${import.meta.env.VITE_APP_URL}/market-bids`, {
 				...formData,
 				deadline: new Date(formData?.deadline),
 				buyer_email,
@@ -55,8 +56,8 @@ function JobDetail() {
 			});
 			setFormData({ email: user?.email });
 			navigate(`/job-bids/${user?.email}`);
-		} catch (error) {
-			console.log(error);
+		} catch ({ response: { data } }) {
+			toast.error(data);
 		}
 	};
 

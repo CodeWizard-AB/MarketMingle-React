@@ -10,8 +10,6 @@ class Link {
 	}
 }
 
-const navigation = [];
-
 const navButtons = [new Link("Log in", "login"), new Link("Sign up", "signup")];
 
 const sliderData = [
@@ -93,4 +91,4 @@ const jobDetials = [
 	},
 ];
 
-export { navigation, navButtons, sliderData, formLabel, jobDetials };
+export { navButtons, sliderData, formLabel, jobDetials };

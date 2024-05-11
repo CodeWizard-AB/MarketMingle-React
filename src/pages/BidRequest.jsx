@@ -1,23 +1,21 @@
-import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import useAxios from "../hooks/useAxios";
 
 const BidRequests = () => {
 	const [requestJobs, setRequestJobs] = useState(useLoaderData());
-
+	const fetchData = useAxios();
 	const handleStatus = function (id, status) {
-		axios
-			.patch(`${import.meta.env.VITE_APP_URL}/market-bids/${id}`, {
-				status: status,
-			})
-			.then(() => {
-				toast.success("Your bid request has updated");
-				setRequestJobs((jobs) => [
-					...jobs.filter((job) => job._id !== id),
-					{ ...jobs.find((job) => job._id === id), status: status },
-				]);
-			});
+		fetchData(`/market-bids/${id}`, {
+			status: status,
+		}).then(() => {
+			toast.success("Your bid request has updated");
+			setRequestJobs((jobs) => [
+				...jobs.filter((job) => job._id !== id),
+				{ ...jobs.find((job) => job._id === id), status: status },
+			]);
+		});
 	};
 
 	return (

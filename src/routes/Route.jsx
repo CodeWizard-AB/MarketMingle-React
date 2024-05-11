@@ -11,6 +11,7 @@ import MyPostJobs from "../pages/MyPostJobs";
 import JobBids from "../pages/JobBids";
 import PrivateRoute from "./PrivateRoute";
 import BidRequests from "../pages/BidRequest";
+import AllJobs from "../pages/AllJobs";
 
 export const router = createBrowserRouter([
 	{
@@ -86,6 +87,14 @@ export const router = createBrowserRouter([
 						`${import.meta.env.VITE_APP_URL}/market-bids?buyer_email=${email}`,
 						{ credentials: "include" }
 					),
+			},
+			{
+				path: "/all-jobs",
+				element: <AllJobs />,
+				// loader: () =>
+				// 	fetch(`${import.meta.env.VITE_APP_URL}/market-jobs`, {
+				// 		credentials: "include",
+				// 	}),
 			},
 		],
 	},

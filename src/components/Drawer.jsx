@@ -2,7 +2,7 @@ import "react-modern-drawer/dist/index.css";
 import Drawer from "react-modern-drawer";
 import { useState } from "react";
 import { Sling as Hamburger } from "hamburger-react";
-import { navButtons, navigation } from "../constant";
+import { navButtons } from "../constant";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import ButtonContainer from "./Button";
@@ -36,13 +36,13 @@ function DrawerContainer() {
 				}}
 				enableOverlay={false}
 			>
-				<ul className="text-center space-y-4">
+				{/* <ul className="text-center space-y-4">
 					{navigation.map((item, i) => (
 						<li key={i * 9} onClick={toggleDrawer}>
 							<Link to={item.link}>{item.title}</Link>
 						</li>
 					))}
-				</ul>
+				</ul> */}
 
 				<div className="text-center space-x-4 mt-4">
 					{!user &&

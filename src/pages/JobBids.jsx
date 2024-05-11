@@ -1,13 +1,15 @@
-import axios from "axios";
-import { useState } from "react";
 import toast from "react-hot-toast";
+import useAxios from "../hooks/useAxios";
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 function JobBids() {
 	const [jobBids, setJobBids] = useState(useLoaderData());
+	const fetchData = useAxios();
+
 	const handleComplete = function (id) {
-		axios
-			.patch(`${import.meta.env.VITE_APP_URL}/market-bids/${id}`, {
+		fetchData
+			.patch(` /market-bids/${id}`, {
 				status: "complete",
 			})
 			.then(() => {
